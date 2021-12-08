@@ -1,24 +1,17 @@
 <template>
-  <the-navigation/>
-  <router-view />
+  <the-navigation />
+  <div class="container">
+    <router-view :key="$route.path" />
+  </div>
 </template>
 
 <script>
-import  TheNavigation from './components/TheNavigation.vue'
+import TheNavigation from "@/components/TheNavigation.vue";
 export default {
-  components:{
+  components: {
     TheNavigation,
-  }
-}
+  },
+};
 </script>
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-
-
 </style>

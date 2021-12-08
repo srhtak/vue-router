@@ -2,40 +2,31 @@
   <div class="home">
     <h1>All Destinations</h1>
     <div class="destinations">
-    <div v-for="destination in destinations" :key="destination.name">
-      <router-link :to="{name :'DestinationDetails',params:{id:destination.id}}" >
-        <h2>{{destination.name}}</h2>
+      <router-link
+        v-for="destination in destinations"
+        :key="destination.id"
+        :to="{
+          name: 'destination.show',
+          params: { id: destination.id, slug: destination.slug },
+        }"
+      >
+        <h2>{{ destination.name }}</h2>
+        <img :src="`/images/${destination.image}`" :alt="destination.name" />
       </router-link>
-      <figure>
-        <router-link :to="{name :'DestinationDetails',params:{id:destination.id}}">
-          <img :src="require(`@/assets/${destination.image}`)" :alt="destination.name">
-        </router-link>
-      </figure>
-    </div>
     </div>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import store from '@/store.js'
-
+import sourceData from "@/data.json";
 export default {
-  name: "Home",
   data() {
     return {
-      destinations: store.destinations,
-    }
+      destinations: sourceData.destinations,
+    };
   },
 };
 </script>
 
-<style scoped>
-  img{
-    max-width: 200px;
-  }
-  .destinations{
-    display: flex;
-    justify-content: space-between;
-  }
+<style>
 </style>

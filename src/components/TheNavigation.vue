@@ -1,34 +1,29 @@
 <template>
-    <nav id="nav">
-        <router-link  to="/">Home</router-link>
-        <router-link  to="/brazil">Brazil</router-link>
-        <router-link  to="/panama">Panama</router-link>
-        <router-link  to="/hawaii">Hawaii</router-link>
-        <router-link  to="/jamaica">Jamaica</router-link>
-    </nav>
+  <div id="nav">
+    <router-link id="logo" to="/">Travel App</router-link>
+    <router-link
+      v-for="destination in destinations"
+      :key="destination.id"
+      :to="{
+        name: 'destination.show',
+        params: { id: destination.id, slug: destination.slug },
+      }"
+    >
+      {{ destination.name }}
+    </router-link>
+  </div>
 </template>
 
 <script>
+import sourceData from "@/data.json";
 export default {
-
-}
+  data() {
+    return {
+      destinations: sourceData.destinations,
+    };
+  },
+};
 </script>
 
-<style scoped>
-#nav {
-    display: flex;
-    justify-content: center;
-    padding: 0 15px;
-}
-
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-  padding: 1rem 0.5rem;
-  text-decoration: none;
-}
-
-#nav a.router-link-exact-active {
-  color: #b31919;
-}
+<style>
 </style>
