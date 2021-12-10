@@ -14,6 +14,11 @@ const routes = [
     name: 'experience.show',
     component: () => import('@/views/ExperienceShow.vue'),
     props: route => ({ ...route.params, id: parseInt(route.params.id) })
+  },
+  {
+    path: '/:pathMatch(.*)*',
+    name: 'NotFound',
+    component: () => import('@/views/NotFound.vue'),
   }
 ]
 
