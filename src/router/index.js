@@ -5,6 +5,17 @@ import sourceData from '@/data.json'
 const routes = [
   { path: '/', name: 'Home', component: Home },
   {
+    path: '/protected', name: 'Protected', component: () => import('@/views/Protected.vue'),
+    meta: {
+      requiresAuth: true,
+    }
+  },
+  {
+    path: '/login',
+    name: 'Login',
+    component: () => import('@/views/Login.vue')
+  },
+  {
     path: '/destination/:id/:slug',
     name: 'destination.show',
     component: () => import('@/views/DestinationShow.vue'),
@@ -38,6 +49,19 @@ const routes = [
 const router = createRouter({
   history: createWebHistory(),
   routes,
+  scrollBehavior(to, from, savedPosition) {
+    return savedPosition || new Promise(resolve => {
+      // if you want to add 
+      setTimeout(() => resolve({ top: 0 }), 1000);
+    })
+  }
 })
+
+router.beforeEach((to) => {
+  if (to.meta.requiresAuth && !window.user) {
+    return { name: 'Login' }
+  }
+})
+
 
 export default router
